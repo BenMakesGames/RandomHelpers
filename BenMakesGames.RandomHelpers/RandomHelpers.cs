@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BenMakesGames
+namespace BenMakesGames.RandomHelpers
 {
     public static class RandomHelpers
     {

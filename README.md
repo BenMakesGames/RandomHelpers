@@ -1,4 +1,4 @@
-﻿## int Random.Roll(int rolls, int sides)
+## int Random.Roll(int rolls, int sides)
 
 Simulates rolling dice to generate a random integer.
 

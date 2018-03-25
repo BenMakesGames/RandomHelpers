@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames", "BenMakesGames\BenMakesGames.csproj", "{BA076EAF-9CFA-45F4-9EC8-14CBA74D26BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames.RandomHelpers", "BenMakesGames.RandomHelpers\BenMakesGames.RandomHelpers.csproj", "{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BA076EAF-9CFA-45F4-9EC8-14CBA74D26BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA076EAF-9CFA-45F4-9EC8-14CBA74D26BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA076EAF-9CFA-45F4-9EC8-14CBA74D26BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA076EAF-9CFA-45F4-9EC8-14CBA74D26BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F9C70B3F-5BE4-4E6F-B5AB-BD171FB4168C}
+		SolutionGuid = {372F8011-7CAB-4E57-A2B5-D6EF3A2130C0}
 	EndGlobalSection
 EndGlobal
