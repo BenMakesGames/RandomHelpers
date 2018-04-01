@@ -105,5 +105,48 @@ namespace BenMakesGames.RandomHelpers
                 list[n] = value;
             }
         }
+
+        /// <summary>
+        /// Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
+        /// When you deal with small base numbers, percent bonuses can be hard to work with, since a hard decision to round up or down
+        /// will cause your percent modifieres to have a much larger or smaller impact than intended.
+        /// There are a few ways to deal with this:
+        /// * Use larger base numbers.
+        /// * Use Math.Round (doesn't help much if numbers don't vary by much; especially if they're small to begin with).
+        /// * Don't use % bonuses; use fixed bonuses.
+        /// * Round down, but then take the remainder as a % chance to add one more.
+        /// Random.NextPercentBonus helps you do the last option (with additional logic to correctly handle % penalties).
+        /// I'd like to emphasize that just because this function helps you do the last option doesn't mean that it's the best
+        /// option for YOUR game! Choose the system that works best for your game; if that system happens to be one where numbers
+        /// are small, but % bonuses are wanted, then this function may help you solve a problem experienced by that system.
+        /// </summary>
+        /// <param name="rng"></param>
+        /// <param name="baseAmount">The base amount to adjust</param>
+        /// <param name="percentIncrease">For example, 0.10 represents +10%; -2 represents -200%.</param>
+        /// <returns></returns>
+        public static int NextPercentBonus(this Random rng, int baseAmount, float percentModifier)
+        {
+            // if the modifier happens to be 0, let's not busy ourselves with a bunch of math...
+            if (percentModifier == 0)
+                return baseAmount;
+
+            float realAmount = baseAmount * (1 + percentModifier);
+
+            // round against the modifier: round down, if the modifier is positive; round up if the modifier is negative
+            int returnedAmount = (int)(percentModifier > 0 ? Math.Floor(realAmount) : Math.Ceiling(realAmount));
+
+            // get chance of moving 1 more in the direction of the modifier (+1 if the modifier is positive; -1 if it's negative)
+            float chanceOfOneMore = Math.Abs(realAmount - baseAmount);
+
+            if(rng.Next() < chanceOfOneMore)
+            {
+                if (percentModifier < 0)
+                    chanceOfOneMore--;
+                else
+                    chanceOfOneMore++;
+            }
+
+            return returnedAmount;
+        }
     }
 }
