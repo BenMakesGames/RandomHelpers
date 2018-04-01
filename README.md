@@ -1,4 +1,4 @@
-Extensions for Random and IList to help you generate random content. IMPORTANT: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
+Extensions for Random and IList to help you generate random content. HEY, LISTEN: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
 
 * nuget package: https://www.nuget.org/packages/BenMakesGames.RandomHelpers
 * GitHub repo: https://github.com/BenMakesGames/RandomHelpers
@@ -98,7 +98,7 @@ Example usage:
 ```c#
 // assuming some instance of Random named "rng":
 int damage = rng.Roll(2, 6) + 2; // 2d6+2
-float damageBonus = 0.15; // +15%
+float damageBonus = 0.15f; // +15%
 
 int finalDamage = rng.NextPercentBonus(damage, damageBonus);
 ```
