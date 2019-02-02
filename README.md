@@ -54,6 +54,10 @@ Generates a random string.
 * **allowedCharacters**: A List or array containing the characters which can appear in the generated string.
 * **length**: The length of the generated string.
 
+## bool Random.NextBool()
+
+Returns either true, or false.
+
 ## T Random.NextEnumValue<T>()
 
 Picks a single, random value from the given Enum. Throws an exception if the given type is not an Enum.

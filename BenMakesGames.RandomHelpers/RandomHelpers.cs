@@ -70,6 +70,16 @@ namespace BenMakesGames.RandomHelpers
         }
 
         /// <summary>
+        /// Returns true, or false.
+        /// </summary>
+        /// <param name="rng"></param>
+        /// <returns></returns>
+        public static bool NextBool(this Random rng)
+        {
+            return rng.NextDouble() < 0.5;
+        }
+
+        /// <summary>
         /// Picks a single, random value from the given Enum. Throws an exception if the given type is not an Enum.
         /// </summary>
         /// <typeparam name="T"></typeparam>
