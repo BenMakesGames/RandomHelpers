@@ -141,9 +141,9 @@ namespace BenMakesGames.RandomHelpers
             if(rng.Next() < chanceOfOneMore)
             {
                 if (percentModifier < 0)
-                    chanceOfOneMore--;
+                    returnedAmount--;
                 else
-                    chanceOfOneMore++;
+                    returnedAmount++;
             }
 
             return returnedAmount;
