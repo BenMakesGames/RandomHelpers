@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>Ben Hendel-Doying</Authors>
     <Company />
     <Description>Extensions for Random and IList to help you generate random content. IMPORTANT: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.</Description>
-    <Copyright>2017 Ben Hendel-Doying</Copyright>
+    <Copyright>2019 Ben Hendel-Doying</Copyright>
     <PackageLicenseUrl>https://github.com/BenMakesGames/RandomHelpers/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>http://benmakesgames.com/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/BenMakesGames/RandomHelpers</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BenMakesGames/RandomHelpers</RepositoryUrl>
     <PackageTags>random rng procgen games</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
