@@ -27,20 +27,6 @@ namespace BenMakesGames.RandomHelpers
         }
 
         /// <summary>
-        /// Picks a single, random element from the given List.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="r"></param>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        public static T Next<T>(this Random r, IList<T> list)
-        {
-            int i = r.Next(list.Count);
-
-            return list[i];
-        }
-
-        /// <summary>
         /// Picks a single, random element from the given Read-only List.
         /// </summary>
         /// <typeparam name="T"></typeparam>
