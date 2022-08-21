@@ -1,3 +1,5 @@
+<a href='https://ko-fi.com/A0A12KQ16' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 Extensions for Random and IList to help you generate random content. HEY, LISTEN: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
 
 * nuget package: https://www.nuget.org/packages/BenMakesGames.RandomHelpers
