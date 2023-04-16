@@ -1,25 +1,44 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.4</Version>
     <Authors>Ben Hendel-Doying</Authors>
-    <Company />
+    <Company>Ben Hendel-Doying</Company>
     <Description>Extensions for Random and IList to help you generate random content. IMPORTANT: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.</Description>
-    <Copyright>2020 Ben Hendel-Doying</Copyright>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <Copyright>2018-2023 Ben Hendel-Doying</Copyright>
+    <Version>2.2.0</Version>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>random rng procgen games</PackageTags>
     <PackageProjectUrl>https://github.com/BenMakesGames/RandomHelpers</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BenMakesGames/RandomHelpers</RepositoryUrl>
-    <PackageTags>random rng procgen games</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
+    <None Include="..\LICENSE.md">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath />
     </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath />
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="CLSCompliantAttribute">
+      <_Parameter1>true</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
