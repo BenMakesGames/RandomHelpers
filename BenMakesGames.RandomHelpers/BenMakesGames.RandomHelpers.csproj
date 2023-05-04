@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Authors>Ben Hendel-Doying</Authors>
     <Company>Ben Hendel-Doying</Company>
-    <Description>Extensions for Random and IList to help you generate random content. IMPORTANT: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.</Description>
+    <Description>Extensions for `Random` and `IList` to help you generate random content. IMPORTANT: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.</Description>
     <Copyright>2018-2023 Ben Hendel-Doying</Copyright>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>random rng procgen games</PackageTags>
@@ -13,10 +13,13 @@
     <RepositoryUrl>https://github.com/BenMakesGames/RandomHelpers</RepositoryUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIconUrl>package-icon.png</PackageIconUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +28,10 @@
       <PackagePath />
     </None>
     <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath />
+    </None>
+    <None Include="..\package-icon.png">
       <Pack>True</Pack>
       <PackagePath />
     </None>
