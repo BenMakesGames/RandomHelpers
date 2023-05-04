@@ -5,7 +5,7 @@
     <Company>Ben Hendel-Doying</Company>
     <Description>Extensions for Random and IList to help you generate random content. IMPORTANT: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.</Description>
     <Copyright>2018-2023 Ben Hendel-Doying</Copyright>
-    <Version>2.2.0</Version>
+    <Version>3.0.0</Version>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>random rng procgen games</PackageTags>
@@ -16,7 +16,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

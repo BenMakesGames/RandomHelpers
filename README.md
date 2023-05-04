@@ -1,15 +1,15 @@
-Extensions for Random and IList to help you generate random content, including dice rolls, enum values, items from lists, and more.
+Extensions for `System.Random` and `IList` to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
 
 **Hey! Listen!** this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
 
 * nuget package: https://www.nuget.org/packages/BenMakesGames.RandomHelpers
 * GitHub repo: https://github.com/BenMakesGames/RandomHelpers
 
+Pro tip: don't `new` up instances of `System.Random` if you don't need to control the seed. Just use `System.Random.Shared`!
+
 [![Buy Me a Coffee at ko-fi.com](https://raw.githubusercontent.com/BenMakesGames/AssetsForNuGet/main/buymeacoffee.png)](https://ko-fi.com/A0A12KQ16)
 
----
-
-## int Random.Roll(int rolls, int sides)
+## `int Random.Roll(int rolls, int sides)`
 
 Simulates rolling dice to generate a random integer.
 
@@ -19,52 +19,90 @@ Simulates rolling dice to generate a random integer.
 Example usage:
 
 ```c#
-// assuming some instance of Random named "rng":
-int damage = rng.Roll(2, 6) + 2; // 2d6+2 damage
+int damage = Random.Shared.Roll(2, 6) + 2; // 2d6+2 damage
 ```
 
-## T Random.Next(IList<T> list)
+## `T Random.Next(IReadOnlyList<T> list)`
 
-Picks a single, random element from the given List or array.
-
-* **list**: The list or array to pick an element from.
+Picks a single, random element from the given array, list, or read-only list.
 
 Example usage:
 
 ```c#
-// assuming some instance of Random named "rng":
-List<string> names = new List<string>() { "Abby", "Ben", "Carly" };
-string name = rng.Next(names);
+var names = new List<string>() { "Abby", "Ben", "Carly" };
+var name = Random.Shared.Next(names);
 ```
 
-## string Random.NextString(string allowedCharacters, int length)
+## `T Random.Next(IReadOnlySet<T> set)`
+
+As above, but for sets, including `HashSet`, `SortedSet`, etc - anything that implements `IReadOnlySet<T>`.
+
+## `TKey Random.Next(IReadOnlyDictionary<TKey, TValue> dictionary)`
+
+Picks a single, random key from the given dictionary, or read-only dictionary.
+
+Example usage:
+
+```c#
+var myFavoriteNumbers = new Dictionary<double, string>() {
+    { -1 / 12.0, "negative one-twelfth" },
+    { 7, "seven" },
+    { 42, "forty-two" },
+};
+
+var number = Random.Shared.NextKey(myFavoriteNumbers);
+```
+
+## `string Random.NextString(string allowedCharacters, int length)`
 
 Generates a random string.
 
 * **allowedCharacters**: A string containing the characters which can appear in the generated string.
-* **length**: The length of the generated string.
+* **length**: The length of the string to generate.
 
 Example usage:
 
 ```c#
 // assuming some instance of Random named "rng":
-string id = rng.NextString("abcdefghijklmnopqrstuvwxyz0123456789", 16);
+string id = Random.Shared.NextString("abcdefghijklmnopqrstuvwxyz0123456789", 16);
 ```
 
-## string Random.NextString(IList<char> allowedCharacters, int length)
+## `string Random.NextString(IReadOnlyList<char> allowedCharacters, int length)`
 
-Generates a random string.
+Generates a random `string`.
 
-* **allowedCharacters**: A List or array containing the characters which can appear in the generated string.
-* **length**: The length of the generated string.
+* **allowedCharacters**: A list or array containing the characters which can appear in the generated string.
+* **length**: The length of the string to generate.
 
-## bool Random.NextBool()
+## `bool Random.NextBool()`
 
-Returns either true, or false.
+Returns either `true`, or `false`.
 
-## T Random.NextEnumValue<T>()
+## `(double X, double Y) Random.NextDoublePointInACircle(double radius = 1)`
 
-Picks a single, random value from the given Enum. Throws an exception if the given type is not an Enum.
+Generates a random point inside a circle of the given radius and centered at (0, 0).
+
+Example usage:
+
+```c#
+var (x, y) = Random.Shared.NextDoublePointInACircle();
+```
+
+## `(float X, float Y) Random.NextSinglePointInACircle(double radius = 1)`
+
+Generates a random point inside a circle of the given radius and centered at (0, 0).
+
+Example usage:
+
+```c#
+var (x, y) = Random.Shared.NextDoublePointInACircle();
+```
+
+The alias `NextFloatPointInACircle` also exists, in case you like calling floats `float` instead of `single`.
+
+## `T Random.NextEnumValue<T>()`
+
+Picks a single, random value from the given `Enum` type.
 
 Example usage:
 
@@ -81,14 +119,27 @@ public enum Race
 
 ```c#
 // assuming some instance of Random named "rng":
-Race race = rng.NextEnumValue<Race>();
+var race = Random.Shared.NextEnumValue<Race>();
 ```
 
-## int Random.NextPercentBonus(int baseAmount, float percentModifier)
+## `void IList<T>.Shuffle(Random rng)`
+
+Fisher-Yates Shuffle. Modifies the array or list in-place.
+
+Unlike the other methods in this library, `Shuffle` operates on a list, and must be passed an instance of `Random` (instead of operating on an RNG, and passing a list).
+
+Example usage:
+
+```c#
+var favoriteFruit = new string[] { "Mango", "Watermelon", "Raspberry", "Cantaloupe" };
+favoriteFruit.Shuffle(Random.Shared);
+```
+
+## `int Random.NextPercentBonus(int baseAmount, float percentModifier)`
 
 Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
 
-When you deal with small base numbers, percent bonuses can be hard to work with, since a hard decision to round up or down will cause your percent modifieres to have a much larger or smaller impact than intended.
+When you deal with small base numbers, percent bonuses can be hard to work with, since a hard decision to round up or down will cause your percent modifiers to have a much larger or smaller impact than intended.
 
 There are a few ways to deal with this:
 
@@ -104,23 +155,15 @@ I'd like to emphasize that just because this function helps you do the last opti
 Example usage:
 
 ```c#
-// assuming some instance of Random named "rng":
-int damage = rng.Roll(2, 6) + 2; // 2d6+2
+int damage = Random.Shared.Roll(2, 6) + 2; // 2d6+2
 float damageBonus = 0.15f; // +15%
 
-int finalDamage = rng.NextPercentBonus(damage, damageBonus);
+int finalDamage = Random.Shared.NextPercentBonus(damage, damageBonus);
 ```
 
-## void IList<T>.Shuffle(Random rng)
+## Additional alias methods
 
-Fisher-Yates Shuffle. Modifies the list in-place.
-
-* **rng**: The RNG to use when performing the shuffle.
-
-Example usage:
-
-```c#
-// assuming some instance of Random named "rng":
-string[] favoriteFruit = new string[] { "Mango", "Watermelon", "Raspberry", "Cantaloupe" };
-favoriteFruit.Shuffle(rng);
-```
+* `NextFloat()`
+  * An alias for the system-provided `NextSingle()` (in case, like me, you always get tripped up by the whole float/single nomenclature)
+* `NextLong()`, `NextLong(long exclusiveMax)`, and `NextLong(long inclusiveMin, long exclusiveMax)`
+  * Aliases for the system-provided `NextInt64` family
