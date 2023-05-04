@@ -98,7 +98,7 @@ Example usage:
 var (x, y) = Random.Shared.NextDoublePointInACircle();
 ```
 
-The alias `NextFloatPointInACircle` also exists, in case you like calling floats `float` instead of `single`.
+The alias `NextFloatPointInACircle` also exists, in case you like calling floats "Float" instead of "Single".
 
 ## `T Random.NextEnumValue<T>()`
 
