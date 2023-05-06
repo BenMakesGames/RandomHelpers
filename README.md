@@ -63,7 +63,6 @@ Generates a random string.
 Example usage:
 
 ```c#
-// assuming some instance of Random named "rng":
 string id = Random.Shared.NextString("abcdefghijklmnopqrstuvwxyz0123456789", 16);
 ```
 
