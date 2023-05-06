@@ -118,7 +118,6 @@ public enum Race
 ...
 
 ```c#
-// assuming some instance of Random named "rng":
 var race = Random.Shared.NextEnumValue<Race>();
 ```
 
