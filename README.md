@@ -95,7 +95,7 @@ Generates a random point inside a circle of the given radius and centered at (0,
 Example usage:
 
 ```c#
-var (x, y) = Random.Shared.NextDoublePointInACircle();
+var (x, y) = Random.Shared.NextSinglePointInACircle();
 ```
 
 The alias `NextFloatPointInACircle` also exists, in case you like calling floats "Float" instead of "Single".
