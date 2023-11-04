@@ -53,11 +53,11 @@ var myFavoriteNumbers = new Dictionary<double, string>() {
 var number = Random.Shared.NextKey(myFavoriteNumbers);
 ```
 
-## `string Random.NextString(string allowedCharacters, int length)`
+## `string Random.NextString(ReadOnlySpan<char> allowedCharacters, int length)`
 
 Generates a random string.
 
-* **allowedCharacters**: A string containing the characters which can appear in the generated string.
+* **allowedCharacters**: A `string` (or any `ReadOnlySpan<char>`) containing the characters which can appear in the generated string.
 * **length**: The length of the string to generate.
 
 Example usage:
@@ -66,16 +66,20 @@ Example usage:
 string id = Random.Shared.NextString("abcdefghijklmnopqrstuvwxyz0123456789", 16);
 ```
 
-## `string Random.NextString(IReadOnlyList<char> allowedCharacters, int length)`
+## `string Random.NextString(List<char> allowedCharacters, int length)`
 
 Generates a random `string`.
 
-* **allowedCharacters**: A list or array containing the characters which can appear in the generated string.
+* **allowedCharacters**: A list containing the characters which can appear in the generated string.
 * **length**: The length of the string to generate.
 
 ## `bool Random.NextBool()`
 
 Returns either `true`, or `false`.
+
+## `bool Random.NextByte()`
+
+Returns a single, random byte (a value from 0 to 255).
 
 ## `(double X, double Y) Random.NextDoublePointInACircle(double radius = 1)`
 
@@ -121,6 +125,8 @@ var race = Random.Shared.NextEnumValue<Race>();
 ```
 
 ## `void IList<T>.Shuffle(Random rng)`
+
+> **Deprecated!** This method will be removed in RandomHelpers 5.0. Use .NET 8's System.Random.Shuffle(...), instead.
 
 Fisher-Yates Shuffle. Modifies the array or list in-place.
 

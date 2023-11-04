@@ -16,8 +16,6 @@ public static class RandomHelpers
     /// <returns></returns>
     public static int Roll(this Random r, int rolls, int sides)
     {
-        // if this looks weird, consider that the alternative is to set "total" to 0, and increment by r.Next(sides) + 1 for each roll.
-        // instead of that - instead of adding 1 to the total for each roll - I'm starting by setting total = rolls. same end result.
         var total = rolls;
 
         for (var i = 0; i < rolls; i++)
@@ -38,7 +36,7 @@ public static class RandomHelpers
         => list[rng.Next(list.Count)];
 
     /// <summary>
-    /// Picks a single, random element from the given hash set, sorted set, etc - anything that implements `IReadOnlySet&lt;T&gt;`.
+    /// Picks a single, random element from the given hash set, sorted set, etc - anything that implements IReadOnlySet&lt;T&gt;.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="rng"></param>
@@ -61,23 +59,33 @@ public static class RandomHelpers
 
     /// <summary>
     /// Generates a random string.
+    ///
+    /// If there are duplicate characters in the allowedCharacters, those characters will be more likely to appear in the result.
     /// </summary>
     /// <param name="rng"></param>
-    /// <param name="allowedCharacters">A string containing the characters allowed.</param>
+    /// <param name="allowedCharacters">A string (or any ReadOnlySpan&lt;char&gt;) containing the characters allowed.</param>
     /// <param name="length">The length of string to generate.</param>
     /// <returns></returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string NextString(this Random rng, string allowedCharacters, int length)
-        => rng.NextString(allowedCharacters.ToCharArray(), length);
+    public static string NextString(this Random rng, ReadOnlySpan<char> allowedCharacters, int length)
+    {
+        var buffer = new char[length];
+
+        for (var i = 0; i < length; i++)
+            buffer[i] = allowedCharacters[rng.Next(allowedCharacters.Length)];
+
+        return new string(buffer);
+    }
 
     /// <summary>
     /// Generates a random string.
+    ///
+    /// If there are duplicate characters in the allowedCharacters, those characters will be more likely to appear in the result.
     /// </summary>
     /// <param name="rng"></param>
-    /// <param name="allowedCharacters">A string containing the characters allowed.</param>
+    /// <param name="allowedCharacters">A list of the characters allowed.</param>
     /// <param name="length">The length of string to generate.</param>
     /// <returns></returns>
-    public static string NextString(this Random rng, IReadOnlyList<char> allowedCharacters, int length)
+    public static string NextString(this Random rng, List<char> allowedCharacters, int length)
     {
         var buffer = new char[length];
 
@@ -88,13 +96,22 @@ public static class RandomHelpers
     }
 
     /// <summary>
-    /// Returns true, or false.
+    /// Returns true or false.
     /// </summary>
     /// <param name="rng"></param>
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool NextBool(this Random rng)
         => (rng.Next() & 1) == 1;
+
+    /// <summary>
+    /// Returns a random byte.
+    /// </summary>
+    /// <param name="rng"></param>
+    /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static byte NextByte(this Random rng)
+        => (byte)rng.Next(0, 256);
 
     /// <summary>
     /// Picks a random point inside a circle of the given radius.
@@ -111,7 +128,6 @@ public static class RandomHelpers
 
         return (Math.Cos(angle) * distance, Math.Sin(angle) * distance);
     }
-
 
     /// <summary>
     /// Picks a random point inside a circle of the given radius.
@@ -130,7 +146,7 @@ public static class RandomHelpers
     }
 
     /// <summary>
-    /// An alias for `Random.NextSinglePointInACircle(radius)`.
+    /// An alias for Random.NextSinglePointInACircle(radius).
     /// </summary>
     /// <param name="rng"></param>
     /// <param name="radius">Radius of the circle; defaults to 1.</param>
@@ -156,6 +172,7 @@ public static class RandomHelpers
     /// <typeparam name="T"></typeparam>
     /// <param name="list"></param>
     /// <param name="rng"></param>
+    [Obsolete("This method will be removed in RandomHelpers 5.0. Use .NET 8's System.Random.Shuffle(...), instead.")]
     public static void Shuffle<T>(this IList<T> list, Random rng)
     {
         var n = list.Count;
@@ -171,14 +188,18 @@ public static class RandomHelpers
 
     /// <summary>
     /// Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
+    ///
     /// When you deal with small base numbers, percent bonuses can be hard to work with, since a hard decision to round up or down
-    /// will cause your percent modifieres to have a much larger or smaller impact than intended.
+    /// will cause your percent modifiers to have a much larger or smaller impact than intended.
+    ///
     /// There are a few ways to deal with this:
     /// * Use larger base numbers.
     /// * Use Math.Round (doesn't help much if numbers don't vary by much; especially if they're small to begin with).
     /// * Don't use % bonuses; use fixed bonuses.
     /// * Round down, but then take the remainder as a % chance to add one more.
+    ///
     /// Random.NextPercentBonus helps you do the last option (with additional logic to correctly handle % penalties).
+    ///
     /// I'd like to emphasize that just because this function helps you do the last option doesn't mean that it's the best
     /// option for YOUR game! Choose the system that works best for your game; if that system happens to be one where numbers
     /// are small, but % bonuses are wanted, then this function may help you solve a problem experienced by that system.
@@ -213,7 +234,7 @@ public static class RandomHelpers
     }
 
     /// <summary>
-    /// An alias for `Random.NextSingle()`.
+    /// An alias for Random.NextSingle().
     /// </summary>
     /// <param name="rng"></param>
     /// <returns></returns>
@@ -222,7 +243,7 @@ public static class RandomHelpers
         => rng.NextSingle();
 
     /// <summary>
-    /// An alias for `Random.NextInt64()`.
+    /// An alias for Random.NextInt64().
     /// </summary>
     /// <param name="rng"></param>
     /// <returns></returns>
@@ -231,7 +252,7 @@ public static class RandomHelpers
         => rng.NextInt64();
 
     /// <summary>
-    /// An alias for `Random.NextInt64(max)`.
+    /// An alias for Random.NextInt64(max).
     /// </summary>
     /// <param name="rng"></param>
     /// <param name="exclusiveMax"></param>
@@ -241,7 +262,7 @@ public static class RandomHelpers
         => rng.NextInt64(exclusiveMax);
 
     /// <summary>
-    /// An alias for `Random.NextInt64(min, max)`.
+    /// An alias for Random.NextInt64(min, max).
     /// </summary>
     /// <param name="rng"></param>
     /// <param name="inclusiveMin"></param>
