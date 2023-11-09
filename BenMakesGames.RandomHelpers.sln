@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames.RandomHelpers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames.RandomHelpers.Test", "BenMakesGames.RandomHelpers.Test\BenMakesGames.RandomHelpers.Test.csproj", "{59E0CCA4-4677-40AE-AF79-2EB5FC901492}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6E13835-7ECD-4BAF-8D8D-D2DBE7741273}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\push.yaml = .github\workflows\push.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
