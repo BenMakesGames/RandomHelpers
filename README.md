@@ -1,3 +1,5 @@
+# What Is It?
+
 Extensions for `System.Random` and `IList` to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
 
 **Hey! Listen!** this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
@@ -8,6 +10,14 @@ Extensions for `System.Random` and `IList` to help you generate random content, 
 Pro tip: don't `new` up instances of `System.Random` if you don't need to control the seed. Just use `System.Random.Shared`!
 
 [![Buy Me a Coffee at ko-fi.com](https://raw.githubusercontent.com/BenMakesGames/AssetsForNuGet/main/buymeacoffee.png)](https://ko-fi.com/A0A12KQ16)
+
+# Upgrading from 4.x to 5.0.0
+
+1. .NET 8.0 is now required.
+2. `IList<T>.Shuffle(Random)` has been removed; `Span<T>.Shuffle(Random)` and `T[].Shuffle(Random)` have been added as pass-thrus for .NET 8's built-in `Random.Shuffle` methods.
+   * For many people, no code changes will be necessary.
+
+# Reference
 
 ## `int Random.Roll(int rolls, int sides)`
 
@@ -124,21 +134,6 @@ public enum Race
 var race = Random.Shared.NextEnumValue<Race>();
 ```
 
-## `void IList<T>.Shuffle(Random rng)`
-
-> **Deprecated!** This method will be removed in RandomHelpers 5.0. Use .NET 8's System.Random.Shuffle(...), instead.
-
-Fisher-Yates Shuffle. Modifies the array or list in-place.
-
-Unlike the other methods in this library, `Shuffle` operates on a list, and must be passed an instance of `Random` (instead of operating on an RNG, and passing a list).
-
-Example usage:
-
-```c#
-var favoriteFruit = new string[] { "Mango", "Watermelon", "Raspberry", "Cantaloupe" };
-favoriteFruit.Shuffle(Random.Shared);
-```
-
 ## `int Random.NextPercentBonus(int baseAmount, float percentModifier)`
 
 Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
@@ -167,7 +162,13 @@ int finalDamage = Random.Shared.NextPercentBonus(damage, damageBonus);
 
 ## Additional alias methods
 
-* `NextFloat()`
-  * An alias for the system-provided `NextSingle()` (in case, like me, you always get tripped up by the whole float/single nomenclature)
-* `NextLong()`, `NextLong(long exclusiveMax)`, and `NextLong(long inclusiveMin, long exclusiveMax)`
-  * Aliases for the system-provided `NextInt64` family
+These are provided for convenience; aliases for built-in .NET methods. They utilize `[MethodImpl(MethodImplOptions.AggressiveInlining)]` to reduce any potential overhead in their use. (See the benchmark project for details.)
+
+| RandomHelpers alias | .NET method |
+| --- | --- |
+| `Random.NextFloat()` | `Random.NextSingle()` |
+| `Random.NextLong()` | `Random.NextInt64()` |
+| `Random.NextLong(long exclusiveMax)` | `Random.NextInt64(long)` |
+| `Random.NextLong(long inclusiveMin, long exclusiveMax)` | `Random.NextInt64(long, long)` |
+| `Span<T>.Shuffle(Random)` | `Random.Shuffle(Span<T>)` |
+| `T[].Shuffle(Random)` | `Random.Shuffle(T[])` |

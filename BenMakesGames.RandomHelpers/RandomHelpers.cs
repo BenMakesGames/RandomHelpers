@@ -166,25 +166,22 @@ public static class RandomHelpers
         => rng.Next(Enum.GetValues<T>());
 
     /// <summary>
-    /// Fisher-Yates Shuffle. Modifies the list in-place.
-    /// from http://stackoverflow.com/questions/273313/randomize-a-listt-in-c-sharp
+    /// An alias for Random.Shuffle(Span&lt;T&gt;).
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="list"></param>
     /// <param name="rng"></param>
-    [Obsolete("This method will be removed in RandomHelpers 5.0. Use .NET 8's System.Random.Shuffle(...), instead.")]
-    public static void Shuffle<T>(this IList<T> list, Random rng)
-    {
-        var n = list.Count;
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Shuffle<T>(this Span<T> list, Random rng) => rng.Shuffle(list);
 
-        while (n > 1)
-        {
-            n--;
-            var k = rng.Next(n + 1);
-
-            (list[k], list[n]) = (list[n], list[k]);
-        }
-    }
+    /// <summary>
+    /// An alias for Random.Shuffle(T[]).
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="rng"></param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Shuffle<T>(this T[] list, Random rng) => rng.Shuffle(list);
 
     /// <summary>
     /// Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
