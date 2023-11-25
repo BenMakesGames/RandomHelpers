@@ -37,7 +37,7 @@ var name = Random.Shared.Next(names);
 
 As above, but for sets, including `HashSet`, `SortedSet`, etc - anything that implements `IReadOnlySet<T>`.
 
-## `TKey Random.Next(IReadOnlyDictionary<TKey, TValue> dictionary)`
+## `TKey Random.NextKey(IReadOnlyDictionary<TKey, TValue> dictionary)`
 
 Picks a single, random key from the given dictionary, or read-only dictionary.
 
