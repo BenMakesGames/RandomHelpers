@@ -5,6 +5,15 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames.RandomHelpers", "BenMakesGames.RandomHelpers\BenMakesGames.RandomHelpers.csproj", "{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames.RandomHelpers.Test", "BenMakesGames.RandomHelpers.Test\BenMakesGames.RandomHelpers.Test.csproj", "{59E0CCA4-4677-40AE-AF79-2EB5FC901492}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6E13835-7ECD-4BAF-8D8D-D2DBE7741273}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\push.yaml = .github\workflows\push.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenMakesGames.RandomHelpers.Benchmark", "BenMakesGames.RandomHelpers.Benchmark\BenMakesGames.RandomHelpers.Benchmark.csproj", "{F6F22644-2B8A-4E13-8B5B-B263827F1D7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +24,14 @@ Global
 		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA5F6088-BDBD-4C63-8430-86E3E3C6D2F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E0CCA4-4677-40AE-AF79-2EB5FC901492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E0CCA4-4677-40AE-AF79-2EB5FC901492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E0CCA4-4677-40AE-AF79-2EB5FC901492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E0CCA4-4677-40AE-AF79-2EB5FC901492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F22644-2B8A-4E13-8B5B-B263827F1D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F22644-2B8A-4E13-8B5B-B263827F1D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F22644-2B8A-4E13-8B5B-B263827F1D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F22644-2B8A-4E13-8B5B-B263827F1D7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

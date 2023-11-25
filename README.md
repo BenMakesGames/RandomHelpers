@@ -1,3 +1,5 @@
+# What Is It?
+
 Extensions for `System.Random` and `IList` to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
 
 **Hey! Listen!** this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
@@ -8,6 +10,13 @@ Extensions for `System.Random` and `IList` to help you generate random content, 
 Pro tip: don't `new` up instances of `System.Random` if you don't need to control the seed. Just use `System.Random.Shared`!
 
 [![Buy Me a Coffee at ko-fi.com](https://raw.githubusercontent.com/BenMakesGames/AssetsForNuGet/main/buymeacoffee.png)](https://ko-fi.com/A0A12KQ16)
+
+# Upgrading from 4.x to 5.1.0
+
+1. .NET 8.0 is now required.
+2. `Span<T>.Shuffle(Random)` and `T[].Shuffle(Random)` have been added as pass-thrus for .NET 8's built-in `Random.Shuffle` methods.
+
+# Reference
 
 ## `int Random.Roll(int rolls, int sides)`
 
@@ -53,30 +62,33 @@ var myFavoriteNumbers = new Dictionary<double, string>() {
 var number = Random.Shared.NextKey(myFavoriteNumbers);
 ```
 
-## `string Random.NextString(string allowedCharacters, int length)`
+## `string Random.NextString(ReadOnlySpan<char> allowedCharacters, int length)`
 
 Generates a random string.
 
-* **allowedCharacters**: A string containing the characters which can appear in the generated string.
+* **allowedCharacters**: A `string` (or any `ReadOnlySpan<char>`) containing the characters which can appear in the generated string.
 * **length**: The length of the string to generate.
 
 Example usage:
 
 ```c#
-// assuming some instance of Random named "rng":
 string id = Random.Shared.NextString("abcdefghijklmnopqrstuvwxyz0123456789", 16);
 ```
 
-## `string Random.NextString(IReadOnlyList<char> allowedCharacters, int length)`
+## `string Random.NextString(List<char> allowedCharacters, int length)`
 
 Generates a random `string`.
 
-* **allowedCharacters**: A list or array containing the characters which can appear in the generated string.
+* **allowedCharacters**: A list containing the characters which can appear in the generated string.
 * **length**: The length of the string to generate.
 
 ## `bool Random.NextBool()`
 
 Returns either `true`, or `false`.
+
+## `bool Random.NextByte()`
+
+Returns a single, random byte (a value from 0 to 255).
 
 ## `(double X, double Y) Random.NextDoublePointInACircle(double radius = 1)`
 
@@ -95,7 +107,7 @@ Generates a random point inside a circle of the given radius and centered at (0,
 Example usage:
 
 ```c#
-var (x, y) = Random.Shared.NextDoublePointInACircle();
+var (x, y) = Random.Shared.NextSinglePointInACircle();
 ```
 
 The alias `NextFloatPointInACircle` also exists, in case you like calling floats "Float" instead of "Single".
@@ -118,7 +130,6 @@ public enum Race
 ...
 
 ```c#
-// assuming some instance of Random named "rng":
 var race = Random.Shared.NextEnumValue<Race>();
 ```
 
@@ -134,6 +145,8 @@ Example usage:
 var favoriteFruit = new string[] { "Mango", "Watermelon", "Raspberry", "Cantaloupe" };
 favoriteFruit.Shuffle(Random.Shared);
 ```
+
+> .NET 8 adds a `Random.Shuffle(...)` method, but it does not work on `IList<T>`s. RandomHelpers provides aliases for .NET 8's `Random.Shuffle(...)` methods for `Span<T>` and `T[]`. These may behave differently from RandomHelpers's `IList<T>.Shuffle` method when using the same random seed.
 
 ## `int Random.NextPercentBonus(int baseAmount, float percentModifier)`
 
@@ -163,7 +176,13 @@ int finalDamage = Random.Shared.NextPercentBonus(damage, damageBonus);
 
 ## Additional alias methods
 
-* `NextFloat()`
-  * An alias for the system-provided `NextSingle()` (in case, like me, you always get tripped up by the whole float/single nomenclature)
-* `NextLong()`, `NextLong(long exclusiveMax)`, and `NextLong(long inclusiveMin, long exclusiveMax)`
-  * Aliases for the system-provided `NextInt64` family
+These are provided for convenience; aliases for built-in .NET methods. They utilize `[MethodImpl(MethodImplOptions.AggressiveInlining)]` to reduce any potential overhead in their use. (See the benchmark project for details.)
+
+| RandomHelpers alias | .NET method |
+| --- | --- |
+| `Random.NextFloat()` | `Random.NextSingle()` |
+| `Random.NextLong()` | `Random.NextInt64()` |
+| `Random.NextLong(long exclusiveMax)` | `Random.NextInt64(long)` |
+| `Random.NextLong(long inclusiveMin, long exclusiveMax)` | `Random.NextInt64(long, long)` |
+| `Span<T>.Shuffle(Random)` | `Random.Shuffle(Span<T>)` |
+| `T[].Shuffle(Random)` | `Random.Shuffle(T[])` |
