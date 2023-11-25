@@ -133,6 +133,21 @@ public enum Race
 var race = Random.Shared.NextEnumValue<Race>();
 ```
 
+## `void IList<T>.Shuffle(Random rng)`
+
+Fisher-Yates Shuffle. Modifies the array or list in-place.
+
+Unlike the other methods in this library, `Shuffle` operates on a list, and must be passed an instance of `Random` (instead of operating on an RNG, and passing a list).
+
+Example usage:
+
+```c#
+var favoriteFruit = new string[] { "Mango", "Watermelon", "Raspberry", "Cantaloupe" };
+favoriteFruit.Shuffle(Random.Shared);
+```
+
+> .NET 8 adds a `Random.Shuffle(...)` method, but it does not work on `IList<T>`s. RandomHelpers provides aliases for .NET 8's `Random.Shuffle(...)` methods for `Span<T>` and `T[]`. These may behave differently from RandomHelpers's `IList<T>.Shuffle` method when using the same random seed.
+
 ## `int Random.NextPercentBonus(int baseAmount, float percentModifier)`
 
 Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
