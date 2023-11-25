@@ -184,6 +184,26 @@ public static class RandomHelpers
     public static void Shuffle<T>(this T[] list, Random rng) => rng.Shuffle(list);
 
     /// <summary>
+    /// Fisher-Yates Shuffle. Modifies the list in-place.
+    /// from http://stackoverflow.com/questions/273313/randomize-a-listt-in-c-sharp
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="rng"></param>
+    public static void Shuffle<T>(this IList<T> list, Random rng)
+    {
+        var n = list.Count;
+
+        while (n > 1)
+        {
+            n--;
+            var k = rng.Next(n + 1);
+
+            (list[k], list[n]) = (list[n], list[k]);
+        }
+    }
+
+    /// <summary>
     /// Suppose you want to increase damage by 10%. Someone deals 18 damage. Do they get +1 damage, or +2?
     ///
     /// When you deal with small base numbers, percent bonuses can be hard to work with, since a hard decision to round up or down

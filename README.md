@@ -11,11 +11,10 @@ Pro tip: don't `new` up instances of `System.Random` if you don't need to contro
 
 [![Buy Me a Coffee at ko-fi.com](https://raw.githubusercontent.com/BenMakesGames/AssetsForNuGet/main/buymeacoffee.png)](https://ko-fi.com/A0A12KQ16)
 
-# Upgrading from 4.x to 5.0.0
+# Upgrading from 4.x to 5.1.0
 
 1. .NET 8.0 is now required.
-2. `IList<T>.Shuffle(Random)` has been removed; `Span<T>.Shuffle(Random)` and `T[].Shuffle(Random)` have been added as pass-thrus for .NET 8's built-in `Random.Shuffle` methods.
-   * For many people, no code changes will be necessary.
+2. `Span<T>.Shuffle(Random)` and `T[].Shuffle(Random)` have been added as pass-thrus for .NET 8's built-in `Random.Shuffle` methods.
 
 # Reference
 
