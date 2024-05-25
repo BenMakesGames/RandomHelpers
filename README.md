@@ -1,4 +1,4 @@
-# What Is It?
+# What is it?
 
 Extensions for `System.Random` and `IList` to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
 
@@ -173,6 +173,15 @@ float damageBonus = 0.15f; // +15%
 
 int finalDamage = Random.Shared.NextPercentBonus(damage, damageBonus);
 ```
+
+## Additional basic methods
+
+* `Random.NextDouble(double exclusiveMax)`
+* `Random.NextDouble(double inclusiveMin, double exclusiveMax)`
+* `Random.NextSingle(float exclusiveMax)`
+* `Random.NextSingle(float inclusiveMin, float exclusiveMax)`
+* `Random.NextFloat(float exclusiveMax)` - alias for `Random.NextSingle(float exclusiveMax)`
+* `Random.NextFloat(float inclusiveMin, float exclusiveMax)` - alias for `Random.NextSingle(float inclusiveMin, float exclusiveMax)`
 
 ## Additional alias methods
 

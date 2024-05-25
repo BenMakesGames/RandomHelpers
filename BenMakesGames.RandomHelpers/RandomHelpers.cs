@@ -250,6 +250,30 @@ public static class RandomHelpers
         return returnedAmount;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static double NextDouble(this Random rng, double exclusiveMax)
+        => rng.NextDouble() * exclusiveMax;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static double NextDouble(this Random rng, double inclusiveMin, double exclusiveMax)
+        => rng.NextDouble() * (exclusiveMax - inclusiveMin) + inclusiveMin;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float NextSingle(this Random rng, float exclusiveMax)
+        => rng.NextSingle() * exclusiveMax;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float NextSingle(this Random rng, float inclusiveMin, float exclusiveMax)
+        => rng.NextSingle() * (exclusiveMax - inclusiveMin) + inclusiveMin;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float NextFloat(this Random rng, float exclusiveMax)
+        => rng.NextSingle(exclusiveMax);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float NextFloat(this Random rng, float inclusiveMin, float exclusiveMax)
+        => rng.NextSingle(inclusiveMin, exclusiveMax);
+
     /// <summary>
     /// An alias for Random.NextSingle().
     /// </summary>
