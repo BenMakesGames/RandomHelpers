@@ -46,6 +46,37 @@ var name = Random.Shared.Next(names);
 
 As above, but for sets, including `HashSet`, `SortedSet`, etc - anything that implements `IReadOnlySet<T>`.
 
+## `T Random.WeightedNext(IReadOnlyList<T> list, Func<T, int> weightSelector)`
+
+Picks a single, random element from the given array, list, or read-only list using a weighting function to
+control the distribution.
+
+For example:
+
+```c#
+var names = new string[] { "Abby", "Ben", "Carly" };
+var name = Random.Shared.WeightedNext(names, x => x.Length);
+```
+
+In the above example, each item is weighted based on its length, so longer names will be picked more often.
+Specifically, the total length of all names is 4 + 3 + 5 = 12. So, "Abby" has a 4/12 chance of being picked,
+"Ben" has a 3/12 chance, and "Carly" has a 5/12 chance.
+
+## `T Random.WeightedNext(IReadOnlyList<T> list, Func<T, long> weightSelector)`
+
+As above, but for a `weightSelector` that returns `long`s.
+
+(Because of the inherent imprecision involved when doing math on `float`s and `double`s, `weightSelector`s that
+return these types are not provided.)
+
+## `T Random.WeightedNext(IReadOnlySet<T> list, Func<T, int> weightSelector)`
+
+As above, but for sets, including `HashSet`, `SortedSet`, etc - anything that implements `IReadOnlySet<T>`.
+
+## `T Random.WeightedNext(IReadOnlySet<T> list, Func<T, long> weightSelector)`
+
+As above, but for a `weightSelector` that returns `long`s.
+
 ## `TKey Random.NextKey(IReadOnlyDictionary<TKey, TValue> dictionary)`
 
 Picks a single, random key from the given dictionary, or read-only dictionary.

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace BenMakesGames.RandomHelpers;
 
+// ReSharper disable MemberCanBePrivate.Global
 public static class RandomHelpers
 {
     /// <summary>
@@ -44,6 +48,168 @@ public static class RandomHelpers
     /// <returns></returns>
     public static T Next<T>(this Random rng, IReadOnlySet<T> set)
         => set.ElementAt(rng.Next(set.Count));
+
+    /// <summary>
+    /// Picks a single, random element from the given array, list, or read-only list using a weighting function to
+    /// control the distribution.
+    ///
+    /// For example:
+    ///
+    ///    var names = new string[] { "Abby", "Ben", "Carly" };
+    ///    var name = Random.Shared.WeightedNext(names, x => x.Length);
+    ///
+    /// In the above example, each item is weighted based on its length, so longer names will be picked more often.
+    /// Specifically, the total length of all names is 4 + 3 + 5 = 12. So, "Abby" has a 4/12 chance of being picked,
+    /// "Ben" has a 3/12 chance, and "Carly" has a 5/12 chance.
+    /// </summary>
+    /// <param name="rng"></param>
+    /// <param name="list"></param>
+    /// <param name="weightSelector">A pure method which returns the weight for a given item. If the weight of any item is 0 or less, an ArgumentException is thrown.</param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="UnreachableException"></exception>
+    public static T WeightedNext<T>(this Random rng, IReadOnlyList<T> list, Func<T, int> weightSelector)
+    {
+        var totalWeight = 0;
+
+        // ReSharper disable once ForCanBeConvertedToForeach - using `for` instead of `foreach` reduces allocations
+        for (var i = 0; i < list.Count; i++)
+        {
+            var weight = weightSelector(list[i]);
+
+            if(weight <= 0)
+                throw new ArgumentException("All weights must be greater than 0.", nameof(weightSelector));
+
+            totalWeight += weight;
+        }
+
+        var value = rng.Next(totalWeight);
+
+        // ReSharper disable once ForCanBeConvertedToForeach - using `for` instead of `foreach` reduces allocations
+        for (var i = 0; i < list.Count; i++)
+        {
+            var item = list[i];
+
+            value -= weightSelector(item);
+
+            if (value < 0)
+                return item;
+        }
+
+        throw new UnreachableException("This should never happen. (Is `weightSelector` not a pure method? It should be!)");
+    }
+
+    /// <inheritdoc cref="WeightedNext{T}(System.Random,System.Collections.Generic.IReadOnlyList{T},System.Func{T,int})"/>
+    public static T WeightedNext<T>(this Random rng, IReadOnlyList<T> list, Func<T, long> weightSelector)
+    {
+        var totalWeight = 0L;
+
+        // ReSharper disable once ForCanBeConvertedToForeach - using `for` instead of `foreach` reduces allocations
+        for (var i = 0; i < list.Count; i++)
+        {
+            var weight = weightSelector(list[i]);
+
+            if(weight <= 0)
+                throw new ArgumentException("All weights must be greater than 0.", nameof(weightSelector));
+
+            totalWeight += weight;
+        }
+
+        var value = rng.NextLong(totalWeight);
+
+        // ReSharper disable once ForCanBeConvertedToForeach - using `for` instead of `foreach` reduces allocations
+        for (var i = 0; i < list.Count; i++)
+        {
+            var item = list[i];
+
+            value -= weightSelector(item);
+
+            if (value < 0)
+                return item;
+        }
+
+        throw new UnreachableException("This should never happen. (Is `weightSelector` not a pure method? It should be!)");
+    }
+
+    /// <summary>
+    /// Picks a single, random element from the given hash set, sorted set, etc - anything that implements
+    /// IReadOnlySet&lt;T&gt; - using a weighting function to control the distribution.
+    ///
+    /// For example:
+    ///
+    ///    var names = new string[] { "Abby", "Ben", "Carly" }.ToFrozenSet();
+    ///    var name = Random.Shared.WeightedNext(names, x => x.Length);
+    ///
+    /// In the above example, each item is weighted based on its length, so longer names will be picked more often.
+    /// Specifically, the total length of all names is 4 + 3 + 5 = 12. So, "Abby" has a 4/12 chance of being picked,
+    /// "Ben" has a 3/12 chance, and "Carly" has a 5/12 chance.
+    /// </summary>
+    /// <param name="rng"></param>
+    /// <param name="set"></param>
+    /// <param name="weightSelector">A pure method which returns the weight for a given item. If the weight of any item is 0 or less, an ArgumentException is thrown.</param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="UnreachableException"></exception>
+    public static T WeightedNext<T>(this Random rng, IReadOnlySet<T> set, Func<T, int> weightSelector)
+    {
+        var totalWeight = 0;
+
+        for (var i = 0; i < set.Count; i++)
+        {
+            var weight = weightSelector(set.ElementAt(i));
+
+            if(weight <= 0)
+                throw new ArgumentException("All weights must be greater than 0.", nameof(weightSelector));
+
+            totalWeight += weight;
+        }
+
+        var value = rng.Next(totalWeight);
+
+        for (var i = 0; i < set.Count; i++)
+        {
+            var item = set.ElementAt(i);
+
+            value -= weightSelector(item);
+
+            if (value < 0)
+                return item;
+        }
+
+        throw new UnreachableException("This should never happen. (Is `weightSelector` not a pure method? It should be!)");
+    }
+
+    /// <inheritdoc cref="WeightedNext{T}(System.Random,System.Collections.Generic.IReadOnlySet{T},System.Func{T,int})"/>
+    public static T WeightedNext<T>(this Random rng, IReadOnlySet<T> set, Func<T, long> weightSelector)
+    {
+        var totalWeight = 0L;
+
+        for (var i = 0; i < set.Count; i++)
+        {
+            var weight = weightSelector(set.ElementAt(i));
+
+            if(weight <= 0)
+                throw new ArgumentException("All weights must be greater than 0.", nameof(weightSelector));
+
+            totalWeight += weight;
+        }
+
+        var value = rng.NextLong(totalWeight);
+
+        for (var i = 0; i < set.Count; i++)
+        {
+            var item = set.ElementAt(i);
+
+            value -= weightSelector(item);
+
+            if (value < 0)
+                return item;
+        }
+
+        throw new UnreachableException("This should never happen. (Is `weightSelector` not a pure method? It should be!)");
+    }
 
     /// <summary>
     /// Picks a single, random key from the given dictionary, or read-only dictionary.
