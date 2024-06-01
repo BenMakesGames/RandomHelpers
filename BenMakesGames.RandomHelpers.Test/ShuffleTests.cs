@@ -29,4 +29,12 @@ public sealed class ShuffleTests
 
         numberList.Shuffle(Random.Shared);
     }
+
+    [Fact]
+    public void Shuffle_ShouldBeInvokable_WhenCollectionIsAnIList()
+    {
+        IList<int> numberList = Enumerable.Range(0, 10).ToList();
+
+        numberList.Shuffle(Random.Shared);
+    }
 }
