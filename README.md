@@ -1,6 +1,6 @@
 # What is it?
 
-Extensions for `System.Random` and `IList` to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
+Extensions for `System.Random`, `IList`, and other collections to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
 
 **Hey! Listen!** this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
 
@@ -178,6 +178,32 @@ favoriteFruit.Shuffle(Random.Shared);
 ```
 
 > .NET 8 adds a `Random.Shuffle(...)` method, but it does not work on `IList<T>`s. RandomHelpers provides aliases for .NET 8's `Random.Shuffle(...)` methods for `Span<T>` and `T[]`. These may behave differently from RandomHelpers's `IList<T>.Shuffle` method when using the same random seed.
+
+## `Queue<T> IEnumerable<T>.ToShuffledQueue(Random rng)`
+
+Creates a queue containing the elements of the given enumerable, in a random order.
+
+This can be useful when you want to randomly pull items from a list when an easy-to-use index is not available, for example in a `.Select` that contains conditionals.
+
+Here a simple example to demonstrate the principle (you probably wouldn't just use integers in this scenario):
+
+```c#
+var availableAttackPositions = Enumerable.Range(0, 50);
+var availableDefendPositions = Enumerable.Range(50, 50);
+
+var shuffledAttackPositions = availableAttackPositions.ToShuffledQueue(Random.Shared);
+var shuffledDefendPositions = availableDefendPositions.ToShuffledQueue(Random.Shared);
+
+var enemies = enemyTemplates // comes from somewhere else; has a CombatRole enum property
+    .Select(template => new Enemy() {
+        Position = template.CombatRole switch {
+            CombatRole.Attacker => shuffledAttackPositions.Dequeue(),
+            CombatRole.Defender => shuffledDefendPositions.Dequeue(),
+        },
+        // other properties
+    })
+    .ToList();
+```
 
 ## `int Random.NextPercentBonus(int baseAmount, float percentModifier)`
 

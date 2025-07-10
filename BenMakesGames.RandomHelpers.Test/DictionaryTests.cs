@@ -1,4 +1,4 @@
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace BenMakesGames.RandomHelpers.Test;
@@ -29,6 +29,6 @@ public sealed class DictionaryTests
         var averageCount = iterations / dictionary.Keys.Count;
 
         foreach (var kvp in keyCount)
-            kvp.Value.Should().BeInRange(averageCount * 9 / 10, averageCount * 11 / 10);
+            kvp.Value.ShouldBeInRange(averageCount * 9 / 10, averageCount * 11 / 10);
     }
 }

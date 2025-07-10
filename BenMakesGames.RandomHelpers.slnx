@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".github\workflows\push.yaml" />
+    <File Path=".gitignore" />
+    <File Path="LICENSE.md" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="BenMakesGames.RandomHelpers.Benchmark\BenMakesGames.RandomHelpers.Benchmark.csproj" Type="Classic C#" />
+  <Project Path="BenMakesGames.RandomHelpers.Test\BenMakesGames.RandomHelpers.Test.csproj" Type="Classic C#" />
+  <Project Path="BenMakesGames.RandomHelpers\BenMakesGames.RandomHelpers.csproj" Type="Classic C#" />
+</Solution>

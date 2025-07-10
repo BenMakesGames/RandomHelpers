@@ -1,5 +1,5 @@
 ﻿using System.Collections.Frozen;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace BenMakesGames.RandomHelpers.Test;
@@ -33,10 +33,10 @@ public sealed class WeightedNextTests
             results[pick.Name]++;
         }
 
-        results["A"].Should().BeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
-        results["B"].Should().BeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
-        results["C"].Should().BeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
-        results["D"].Should().BeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
+        results["A"].ShouldBeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
+        results["B"].ShouldBeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
+        results["C"].ShouldBeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
+        results["D"].ShouldBeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
     }
 
     [Fact]
@@ -66,10 +66,10 @@ public sealed class WeightedNextTests
             results[pick.Name]++;
         }
 
-        results["A"].Should().BeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
-        results["B"].Should().BeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
-        results["C"].Should().BeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
-        results["D"].Should().BeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
+        results["A"].ShouldBeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
+        results["B"].ShouldBeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
+        results["C"].ShouldBeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
+        results["D"].ShouldBeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
     }
 
     [Fact]
@@ -99,10 +99,10 @@ public sealed class WeightedNextTests
             results[pick.Name]++;
         }
 
-        results["A"].Should().BeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
-        results["B"].Should().BeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
-        results["C"].Should().BeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
-        results["D"].Should().BeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
+        results["A"].ShouldBeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
+        results["B"].ShouldBeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
+        results["C"].ShouldBeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
+        results["D"].ShouldBeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
     }
 
     [Fact]
@@ -132,9 +132,9 @@ public sealed class WeightedNextTests
             results[pick.Name]++;
         }
 
-        results["A"].Should().BeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
-        results["B"].Should().BeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
-        results["C"].Should().BeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
-        results["D"].Should().BeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
+        results["A"].ShouldBeInRange((int)(10_000 * 1 / 10.0 * 0.95), (int)(10_000 * 1 / 10.0 * 1.05));
+        results["B"].ShouldBeInRange((int)(10_000 * 2 / 10.0 * 0.95), (int)(10_000 * 2 / 10.0 * 1.05));
+        results["C"].ShouldBeInRange((int)(10_000 * 3 / 10.0 * 0.95), (int)(10_000 * 3 / 10.0 * 1.05));
+        results["D"].ShouldBeInRange((int)(10_000 * 4 / 10.0 * 0.95), (int)(10_000 * 4 / 10.0 * 1.05));
     }
 }

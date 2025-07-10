@@ -1,5 +1,4 @@
-using System.Collections.Immutable;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace BenMakesGames.RandomHelpers.Test;
@@ -18,7 +17,7 @@ public sealed class StringTests
         var random = new Random(AnySeed);
 
         for (var i = 0; i < iterations; i++)
-            random.NextString(allowedCharacters, requestedLength).Should().HaveLength(requestedLength);
+            random.NextString(allowedCharacters, requestedLength).Length.ShouldBe(requestedLength);
     }
 
     [Fact]
