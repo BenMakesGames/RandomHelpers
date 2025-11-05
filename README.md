@@ -2,14 +2,14 @@
 
 Extensions for `System.Random`, `IList`, and other collections to help you generate random content, including dice rolls, enum values, items from lists, sets, dictionaries, and more.
 
-**Hey! Listen!** this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
+> 🧚 **Hey! Listen!** this library was designed for use in games; no effort has been made to make these methods cryptographically secure.
 
 * nuget package: https://www.nuget.org/packages/BenMakesGames.RandomHelpers
 * GitHub repo: https://github.com/BenMakesGames/RandomHelpers
 
 Pro tip: don't `new` up instances of `System.Random` if you don't need to control the seed. Just use `System.Random.Shared`!
 
-[![Buy Me a Coffee at ko-fi.com](https://raw.githubusercontent.com/BenMakesGames/AssetsForNuGet/main/buymeacoffee.png)](https://ko-fi.com/A0A12KQ16)
+> [🧚 **Hey, listen!** You can support my development of open-source software on Patreon](https://www.patreon.com/BenMakesGames)
 
 # Upgrading from 4.x to 5.1.0
 
