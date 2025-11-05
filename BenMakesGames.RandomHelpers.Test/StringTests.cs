@@ -46,7 +46,7 @@ public sealed class StringTests
     public void NextString_ShouldBeInvokable_WhenAllowedCharactersIsASpan()
     {
         const int anyLength = 10;
-        var allowedCharacters = "abcdefgHIJKLMNOP".ToCharArray().AsSpan();
+        var allowedCharacters = "abcdefgHIJKLMNOP".AsSpan();
 
         var random = new Random(AnySeed);
 

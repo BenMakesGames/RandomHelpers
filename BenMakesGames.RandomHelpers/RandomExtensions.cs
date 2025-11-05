@@ -38,6 +38,17 @@ public static class RandomExtensions
         => list[rng.Next(list.Count)];
 
     /// <summary>
+    /// Picks a single, random element from the given span.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="rng"></param>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static T Next<T>(this Random rng, ReadOnlySpan<T> list)
+        => list[rng.Next(list.Length)];
+
+    /// <summary>
     /// Picks a single, random element from the given hash set, sorted set, etc - anything that implements IReadOnlySet&lt;T&gt;.
     /// </summary>
     /// <typeparam name="T"></typeparam>

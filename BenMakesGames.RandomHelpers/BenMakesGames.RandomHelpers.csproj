@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Authors>Ben Hendel-Doying</Authors>
     <Company>Ben Hendel-Doying</Company>
-    <Description>Extensions for `Random` to help you generate random content. HEY, LISTEN: this library was designed for use in games; no effort has been made to make these methods cryptographically secure.</Description>
+    <Description>Extensions for `System.Random` to help you generate random content. HEY, LISTEN: `System.Random` is not necessarily cryptographically secure.</Description>
     <Copyright>2018-2024 Ben Hendel-Doying</Copyright>
-    <Version>5.4.1</Version>
+    <Version>6.0.0-rc1</Version>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>random rng procgen games</PackageTags>
@@ -18,7 +18,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
   </PropertyGroup>

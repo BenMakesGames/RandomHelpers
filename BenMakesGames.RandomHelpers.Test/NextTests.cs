@@ -28,10 +28,24 @@ public sealed class NextTests
         Random.Shared.Next(numberList);
     }
 
+    [Fact]
+    public void Next_ShouldBeInvokable_WhenCollectionIsAReadOnlySpan()
+    {
+        var numberList = "0123456789".AsSpan();
+
+        Random.Shared.Next(numberList);
+    }
+
+    [Fact]
+    public void Next_ShouldBeInvokable_WhenCollectionIsASpan()
+    {
+        var numberList = new Span<int>([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]);
+
+        Random.Shared.Next(numberList);
+    }
+
     // unsupported collection types that might be nice to support:
     // IList<T>
-    // Span<T>
-    // ReadOnlySpan<T>
     // ISet<T>
     // make sure to benchmark solutions!
 }
