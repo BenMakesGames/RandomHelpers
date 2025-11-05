@@ -11,10 +11,15 @@ Pro tip: don't `new` up instances of `System.Random` if you don't need to contro
 
 > [🧚 **Hey, listen!** You can support my development of open-source software on Patreon](https://www.patreon.com/BenMakesGames)
 
+# Upgrading from 5.x to 6.0.0
+
+1. .NET 10.0
+2. No other breaking changes
+
 # Upgrading from 4.x to 5.1.0
 
-1. .NET 8.0 is now required.
-2. `Span<T>.Shuffle(Random)` and `T[].Shuffle(Random)` have been added as pass-thrus for .NET 8's built-in `Random.Shuffle` methods.
+1. .NET 8.0
+2. No other breaking changes
 
 # Reference
 
@@ -45,6 +50,10 @@ var name = Random.Shared.Next(names);
 ## `T Random.Next(IReadOnlySet<T> set)`
 
 As above, but for sets, including `HashSet`, `SortedSet`, etc - anything that implements `IReadOnlySet<T>`.
+
+## `T Random.Next(ReadOnlySpan<T> set)`
+
+As above, but for `ReadOnlySpan`s and `Span`s.
 
 ## `T Random.WeightedNext(IReadOnlyList<T> list, Func<T, int> weightSelector)`
 
@@ -185,7 +194,7 @@ Creates a queue containing the elements of the given enumerable, in a random ord
 
 This can be useful when you want to randomly pull items from a list when an easy-to-use index is not available, for example in a `.Select` that contains conditionals.
 
-Here a simple example to demonstrate the principle (you probably wouldn't just use integers in this scenario):
+Here's a simple example to demonstrate the principle (you probably wouldn't just use integers in this scenario):
 
 ```c#
 var availableAttackPositions = Enumerable.Range(0, 50);
@@ -214,7 +223,7 @@ When you deal with small base numbers, percent bonuses can be hard to work with,
 There are a few ways to deal with this:
 
 * Use larger base numbers.
-* Use Math.Round (doesn't help much if numbers don't vary by much; especially if they're small to begin with).
+* Use `Math.Round` (doesn't help much if numbers don't vary by much; especially if they're small to begin with).
 * Don't use % bonuses; use fixed bonuses.
 * Round down, but then take the remainder as a % chance to add one more.
 
