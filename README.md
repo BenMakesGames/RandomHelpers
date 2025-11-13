@@ -7,14 +7,14 @@ Extensions for `System.Random`, `IList`, and other collections to help you gener
 * nuget package: https://www.nuget.org/packages/BenMakesGames.RandomHelpers
 * GitHub repo: https://github.com/BenMakesGames/RandomHelpers
 
-Pro tip: don't `new` up instances of `System.Random` if you don't need to control the seed. Just use `System.Random.Shared`!
-
 > [🧚 **Hey, listen!** You can support my development of open-source software on Patreon](https://www.patreon.com/BenMakesGames)
 
 # Upgrading from 5.x to 6.0.0
 
 1. .NET 10.0
 2. No other breaking changes
+
+Taking advantage of C# 14's implicit span conversions, method overloads have been added to this library for picking random elements from `Span<>`s and `ReadOnlySpan<>`s.
 
 # Upgrading from 4.x to 5.1.0
 

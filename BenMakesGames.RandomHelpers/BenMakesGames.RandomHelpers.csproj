@@ -5,7 +5,7 @@
     <Company>Ben Hendel-Doying</Company>
     <Description>Extensions for `System.Random` to help you generate random content. HEY, LISTEN: `System.Random` is not necessarily cryptographically secure.</Description>
     <Copyright>2018-2024 Ben Hendel-Doying</Copyright>
-    <Version>6.0.0-rc1</Version>
+    <Version>6.0.0</Version>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>random rng procgen games</PackageTags>
